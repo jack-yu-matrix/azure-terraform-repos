@@ -66,10 +66,11 @@ resource "azurerm_network_security_group" "publicipnsg" {
 }
 
 resource "azurerm_network_interface" "nic" {
-  count               = "${var.instances_count}"
-  name                = "${var.resource_group_name}-nic-${count.index}"
-  location            = "${var.location}"
-  resource_group_name = "${var.resource_group_name}"
+  count                     = "${var.instances_count}"
+  name                      = "${var.resource_group_name}-nic-${count.index}"
+  location                  = "${var.location}"
+  resource_group_name       = "${var.resource_group_name}"
+  network_security_group_id = "${azurerm_network_security_group.publicipnsg.id}"
 
   ip_configuration {
     name                          = "${var.resource_group_name}-nic-configuration-${count.index}"
@@ -78,7 +79,7 @@ resource "azurerm_network_interface" "nic" {
     public_ip_address_id          = "${element(azurerm_public_ip.publicip.*.id, count.index)}"
   }
 
-  depends_on = ["azurerm_public_ip.publicip", "azurerm_resource_group.resource_group"]
+  depends_on = ["azurerm_public_ip.publicip", "azurerm_resource_group.resource_group", "azurerm_network_security_group.publicipnsg"]
 
   tags {
     environment = "${var.resource_env}"
