@@ -16,4 +16,6 @@ module general-public-instances {
   instances_count      = 4
   resource_env         = "${var.resource_env}"
   virtual_network_cidr = "${var.virtual_network_cidr}"
+  public_subnet_cidr   = "${var.public_subnet_cidr}"
+  vm_size              = "${var.general_public_instances}"
 }
