@@ -49,13 +49,109 @@ resource "azurerm_network_security_group" "publicipnsg" {
   depends_on          = ["azurerm_resource_group.resource_group"]
 
   security_rule {
-    name                       = "SSH"
+    name                       = "SSH00"
+    priority                   = 1000
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "112.81.47.25/32"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "SSH01"
     priority                   = 1001
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
+    source_address_prefix      = "180.169.57.41/32"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "SSH02"
+    priority                   = 1002
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "180.169.57.42/32"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Consul-Dashboard10"
+    priority                   = 1010
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8500"
+    source_address_prefix      = "112.81.47.25/32"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Consul-Dashboard11"
+    priority                   = 1011
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8500"
+    source_address_prefix      = "180.169.57.41/32"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Consul-Dashboard12"
+    priority                   = 1012
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8500"
+    source_address_prefix      = "180.169.57.42/32"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "http"
+    priority                   = 1020
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "https"
+    priority                   = 1021
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "configserver"
+    priority                   = 1022
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8888"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
@@ -120,7 +216,7 @@ resource "azurerm_virtual_machine" "vm" {
     name              = "${var.resource_group_name}-osdisk-${count.index}"
     caching           = "ReadWrite"
     create_option     = "FromImage"
-    managed_disk_type = "Premium_LRS"
+    #managed_disk_type = "Premium_LRS"
   }
 
   storage_image_reference {
