@@ -168,6 +168,18 @@ resource "azurerm_network_security_group" "publicipnsg" {
     destination_address_prefix = "*"
   }
 
+  security_rule {
+    name                       = "appserver1024"
+    priority                   = 1024
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8887"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
   tags {
     environment = "${var.resource_env}"
   }
