@@ -155,6 +155,7 @@ resource "azurerm_network_security_group" "publicipnsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+
   security_rule {
     name                       = "dockerclient"
     priority                   = 1023
@@ -224,9 +225,10 @@ resource "azurerm_virtual_machine" "vm" {
   vm_size               = "${var.vm_size}"
 
   storage_os_disk {
-    name              = "${var.resource_group_name}-osdisk-${count.index}"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
+    name          = "${var.resource_group_name}-osdisk-${count.index}"
+    caching       = "ReadWrite"
+    create_option = "FromImage"
+
     #managed_disk_type = "Premium_LRS"
   }
 
