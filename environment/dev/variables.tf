@@ -9,3 +9,4 @@ variable resource_group_name {}
 variable virtual_network_cidr {}
 variable public_subnet_cidr {}
 variable general_public_instances {}
+variable key_data {}

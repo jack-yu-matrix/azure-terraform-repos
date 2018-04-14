@@ -18,4 +18,5 @@ module general-public-instances {
   virtual_network_cidr = "${var.virtual_network_cidr}"
   public_subnet_cidr   = "${var.public_subnet_cidr}"
   vm_size              = "${var.general_public_instances}"
+  key_data             = "${var.key_data}"
 }
