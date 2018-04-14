@@ -106,6 +106,11 @@ resource "azurerm_storage_account" "account" {
   }
 }
 
+data "template_file" "vminit" {
+  template = "${file("${path.module}/../../template/bootstrap.sh")}"
+  count    = "${var.instances_count}"
+}
+
 resource "azurerm_virtual_machine" "vm" {
   count                 = "${var.instances_count}"
   name                  = "${var.resource_group_name}-general-public-vm-${count.index}"
@@ -131,6 +136,7 @@ resource "azurerm_virtual_machine" "vm" {
   os_profile {
     computer_name  = "${var.resource_group_name}-vm-${count.index}"
     admin_username = "azureuser"
+    custom_data    = "${element(data.template_file.vminit.*.rendered, count.index)}"
   }
 
   os_profile_linux_config {
