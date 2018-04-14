@@ -33,7 +33,7 @@ resource "azurerm_virtual_network" "microservicenetwork" {
 resource "azurerm_subnet" "microservicesubnet" {
     name                 = "${var.resource_group_name}-subnet"
     resource_group_name  = "${var.resource_group_name}"
-    virtual_network_name = "${var.resource_group_name}_network"
+    virtual_network_name = "${var.resource_group_name}-network"
     address_prefix       = "10.0.2.0/24"
 }
 
