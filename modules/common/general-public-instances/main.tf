@@ -46,6 +46,7 @@ resource "azurerm_network_security_group" "publicipnsg" {
   name                = "${var.resource_group_name}-publicipsg"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group_name}"
+  depends_on          = ["azurerm_resource_group.resource_group"]
 
   security_rule {
     name                       = "SSH"
