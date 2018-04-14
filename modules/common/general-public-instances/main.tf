@@ -108,7 +108,7 @@ resource "azurerm_storage_account" "account" {
 }
 
 data "template_file" "vminit" {
-  template = "${file("${path.module}/../../template/bootstrap.sh")}"
+  template = "${file("${path.module}/../../template/cloud-init.txt")}"
   count    = "${var.instances_count}"
 }
 
