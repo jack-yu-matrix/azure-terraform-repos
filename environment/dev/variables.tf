@@ -6,3 +6,4 @@ variable rm_env {}
 variable resource_env {}
 variable location {}
 variable resource_group_name {}
+variable virtual_network_cidr {}
