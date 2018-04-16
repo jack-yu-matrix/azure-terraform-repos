@@ -13,7 +13,7 @@ module general-public-instances {
   source               = "../../modules/common/general-public-instances"
   resource_group_name  = "${var.resource_group_name}"
   location             = "${var.location}"
-  instances_count      = 4
+  instances_count      = 5
   resource_env         = "${var.resource_env}"
   virtual_network_cidr = "${var.virtual_network_cidr}"
   public_subnet_cidr   = "${var.public_subnet_cidr}"
