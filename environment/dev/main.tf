@@ -9,6 +9,16 @@ provider "azurerm" {
   environment     = "${var.rm_env}"
 }
 
+terraform {
+  backend "azurerm" {
+    environment          = "china"
+    access_key           = "fioCwr9rxgLnF9MFrtAbpM3yIkByUK0tYexmtdybaNF+jsgAnzsokwh3AmIO5xBaD4WuPDluoj92ao7UnnyIfw=="
+    storage_account_name = "diage3a2bd3e3d8a2689"
+    container_name       = "cndev-terraform-state"
+    key                  = "terraform.tfstate"
+  }
+}
+
 module general-public-instances {
   source               = "../../modules/common/general-public-instances"
   resource_group_name  = "${var.resource_group_name}"
