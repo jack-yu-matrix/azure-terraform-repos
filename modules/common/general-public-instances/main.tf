@@ -190,6 +190,7 @@ resource "azurerm_network_security_group" "publicipnsg" {
     destination_port_range     = "5044"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
+    description                = "Logstash Beats interface, receives logs from Beats such as Filebeat "
   }
 
   security_rule {
@@ -202,6 +203,7 @@ resource "azurerm_network_security_group" "publicipnsg" {
     destination_port_range     = "5601"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
+    description                = "Kibana web interface"
   }
 
   security_rule {
@@ -214,6 +216,7 @@ resource "azurerm_network_security_group" "publicipnsg" {
     destination_port_range     = "9200"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
+    description                = "Elasticsearch JSON interface"
   }
 
   security_rule {
@@ -226,6 +229,7 @@ resource "azurerm_network_security_group" "publicipnsg" {
     destination_port_range     = "9300"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
+    description                = "The image also exposes Elasticsearch's transport interface on port 9300. Use the  -p 9300:9300.used by Elasticsearch's Java client API"
   }
 
   tags {
